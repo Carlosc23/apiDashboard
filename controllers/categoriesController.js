@@ -13,7 +13,7 @@ async function retrieveCategoriesInfo(req, res, next) {
         }
     }]
       );
-      const clientAmount2 = await Client.aggregate([{
+      const clientTransaction = await Client.aggregate([{
         $group:{
             _id:'$categoria',
             "num_trx":{$sum:'$num_trx'}
@@ -23,7 +23,7 @@ async function retrieveCategoriesInfo(req, res, next) {
     res.json({
         clients: [clientCount.length,clientCount2.length],
         amount: clientAmount,
-        amount2: clientAmount2
+        transaction: clientTransaction
     })
  
   }
