@@ -4,8 +4,8 @@ const Client = require("../models/Client");
 
 async function retrieveCategoriesInfo(req, res, next) {
 
-     // const clientCount = await Client.find({"tipo_doc":1}).distinct('documento');
-      //const clientCount2 = await Client.find({"tipo_doc":2}).distinct('documento');
+      const clientCount = await Client.find({"tipo_doc":1}).distinct('documento');
+      const clientCount2 = await Client.find({"tipo_doc":2}).distinct('documento');
       const clientAmount = await Client.aggregate([{
         $group:{
             _id:'$categoria',
@@ -21,7 +21,7 @@ async function retrieveCategoriesInfo(req, res, next) {
     }]
       );
     res.json({
-        //clients: [clientCount.length,clientCount2.length],
+        clients: [clientCount.length,clientCount2.length],
         amount: clientAmount,
         amount2: clientAmount2
     })
